@@ -2,6 +2,7 @@
 ```
  即 1ns*100 和 hh:mm:ss之间的互相转换
 ```
+[点击试用](https://puzzledstorm.github.io/hns-interconvert-hhmmss/)
 
 ### thanks
 ```
