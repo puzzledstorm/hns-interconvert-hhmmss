@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.css">
+    <script  src="jquery.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <title>Converter</title>
+</head>
+<body class="bg-dark" >
+    <h1 class="text-center text-success border w-50 shadow mx-auto border-primary py-3 text-monospace mt-4">百纳秒-时分秒</h1>
+        <p class="text-center text-capitalize text-monospace text-light  mt-3">在要转换的字段中输入值</p>
+            <table class="table-bordered shadow table-primary w-75 mx-auto">
+                <thead class="bg-dark text-center text-capitalize text-warning">
+                <th>键</th>
+                <th>输入</th>
+                <th>键</th>
+                <th>输入</th>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        <td class=" text-capitalize text-center">百纳秒/格式:NS*100</td>
+                        <td class="">
+                            <input type="number" id="hns" onkeyup="hns()" onfocus="hns()" placeholder="hns" class=" form-control " />
+                        </td>
+                        <td class="text-capitalize text-center">时分秒/格式:HH:MM:SS</td>
+                        <td class="">
+                            <input type="text" id="hms" onkeyup="hms()" onfocus="hms()" placeholder="hms" class=" form-control " />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+                <div class="col-12 my-4 ">
+                    <center>
+                        <button onclick="fs()" class="btn  btn-success">重置</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        /*
+        * functions for calculations are here
+         */
+        function fs(){
+            $("#hns").val("");
+            $("#hms").val("");
+        }
+        function hms(){
+            var hms = $("#hms").val();
+            res_hms = timeToSeconds(hms)*10000000;
+            console.log(res_hms);
+            $('#hns').val(res_hms);
+        }
+        function hns(){
+            var hns = $("#hns").val();
+            res = SecondsToTime(hns/10000000);
+            console.log(res);
+            $('#hms').val(res);
+        }
+
+
+        function SecondsToTime(a) {
+            var hour, minute, second;
+            hour = Math.floor(a / 3600);
+            minute = Math.floor(a / 60) - (hour * 60);
+            second = a - (hour * 3600) - (minute * 60);
+            function z(e) {
+                if (e < 10) {
+                    e = "0" + e;
+                }
+                return e;
+            }
+            hour = z(hour);
+            minute = z(minute);
+            second = z(second);
+            return hour + ":" + minute + ":" + second;
+        }
+        
+        function timeToSeconds(t) {
+            let hm = t.split(":").map(x => Number(x));
+            return hm[0] * 3600 + hm[1] * 60 + hm[2];
+        }
+    </script>
+</body>
+</html>
